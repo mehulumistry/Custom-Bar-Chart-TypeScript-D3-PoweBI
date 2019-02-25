@@ -1,0 +1,27 @@
+{
+  "name": "visual",
+  "version": "1.2.1",
+  "scripts": {
+    "start": "npx pbiviz start",
+    "build": "npx pbiviz package",
+    "make:cert": "npx pbiviz --create-cert",
+    "install:cert": "npx pbiviz --install-cert"
+  },
+  "dependencies": {
+    "@types/polylabel": "^1.0.5",
+    "bootstrap": "^4.1.0",
+    "d3": "^3.5.5",
+    "jquery": "^3.3.1",
+    "onecolor": "^3.1.0",
+    "npm": "^6.4.1",
+    "powerbi-models": "^1.0.7",
+    "powerbi-visuals-utils-dataviewutils": "1.2.0",
+    "powerbi-visuals-utils-typeutils": "^1.1.0",
+    "powerbi-visuals-utils-interactivityutils": "^3.2.0",
+    "powerbi-visuals-utils-svgutils": "^1.1.0",
+    "powerbi-visuals-utils-tooltiputils": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/d3": "^5.0.0"
+  }
+}

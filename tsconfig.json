@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "target": "ES5",
+    "sourceMap": true,
+    "out": "./.tmp/build/visual.js",
+
+    "lib": [
+      "dom",
+      "es2017"
+    ]
+  },
+  "files": [
+    "typings/index.d.ts",
+    ".api/v2.3.0/PowerBI-visuals.d.ts",
+    "node_modules/powerbi-visuals-utils-dataviewutils/lib/index.d.ts",
+    "node_modules/powerbi-visuals-utils-typeutils/lib/index.d.ts",
+    "node_modules/powerbi-visuals-utils-svgutils/lib/index.d.ts",
+    "node_modules/powerbi-visuals-utils-interactivityutils/lib/index.d.ts",
+    "node_modules/powerbi-models/dist/models-noexports.d.ts",
+    "src/js/tooltipServiceWrapper.ts",
+    "src/js/functions.ts",
+    "src/js/TooltipVisual.ts",
+    "src/visual.types.ts",
+    "src/settings.ts",
+    "src/chart.ts",
+    "src/transformer.ts",
+    "src/visual.ts"
+  ]
+}

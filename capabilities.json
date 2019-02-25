@@ -1,0 +1,60 @@
+{
+    "dataRoles": [
+        { "displayName": "Ids (Berth, Visit Key)","name": "id","kind": "Grouping" },
+		{ "displayName": "Value","name": "value","kind": "Measure" },
+		{ "displayName": "Markers (Aft, Fore)","name": "markers","kind": "Measure" },
+		{ "displayName": "Display Times (Arrival, Departure)","name": "displayTimes","kind": "Measure" },
+		{ "displayName": "Measured Times", "name": "measuredTime", "kind": "Measure" },
+		{ "displayName": "Equipment", "name": "equipment", "kind": "Measure" },
+		{ "displayName": "Current Date", "name": "currentDate", "kind": "Measure" },
+		{ "displayName": "Tooltips", "name": "tooltips", "kind": "Measure" }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+				{ 
+					"value": { "max": 1 },
+					"markers": { "max": 2 },
+					"displayTimes": { "max": 2 },
+					"tooltips": { "max": 10 }
+				}
+			],
+            "categorical": {
+                "categories": {"for": {"in": "id"}, "dataReductionAlgorithm": {"top": {}}},
+                "values": {
+                    "select": [
+                       	{ "bind": { "to": "value" } },
+						{ "bind": { "to": "markers" } },
+						{ "bind": { "to": "displayTimes" } },
+						{ "bind": { "to": "measuredTime" } },
+						{ "bind": { "to": "equipment" } },
+						{ "bind": { "to": "tooltips" } }
+                    ]
+                }
+            }
+        }
+    ],
+    "objects": {
+        "color": {
+            "displayName": "Data Points",
+            "description": "Color settings for elements",
+            "properties": {
+                "fillType": {
+                    "displayName": "Fill Type",
+                    "type": {
+                        "enumeration": [
+                            { "displayName": "Solid", "value": "solid" },
+                            { "displayName": "Gradient 2", "value": "gradient2" }
+                        ]
+                    }
+                },
+                "fill": { "displayName": "Fill", "type": { "fill": { "solid": { "color": true } } } },
+                "min": { "displayName": "Min", "type": { "fill": { "solid": { "color": true } } } },
+                "max": { "displayName": "Max", "type": { "fill": { "solid": { "color": true } } } }
+
+            }
+        }
+             
+        
+    }
+}

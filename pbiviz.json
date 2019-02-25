@@ -1,0 +1,32 @@
+{
+  "visual": {
+    "name": "barChart",
+    "displayName": "barChart",
+    "guid": "barChartFBC49E6A38D14DF595EEFB76BCF9C0EA",
+    "visualClassName": "Visual",
+    "version": "1.0.0",
+    "description": "testing custom visual by making custom bar chart",
+    "supportUrl": "",
+    "gitHubUrl": "https://www.github.com/mehulumistry"
+  },
+  "apiVersion": "2.3.0",
+  "author": {
+    "name": "Mehul Mistry",
+    "email": "Mehul.Mistry@avlino.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": [
+    "node_modules/d3/d3.js",
+		"node_modules/powerbi-visuals-utils-dataviewutils/lib/index.js",
+    "node_modules/powerbi-visuals-utils-typeutils/lib/index.js",
+    "node_modules/powerbi-visuals-utils-svgutils/lib/index.js",
+    "node_modules/powerbi-visuals-utils-interactivityutils/lib/index.js",
+		"node_modules/powerbi-models/dist/models.js"
+  ],
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": "dependencies.json",
+  "stringResources": []
+}
