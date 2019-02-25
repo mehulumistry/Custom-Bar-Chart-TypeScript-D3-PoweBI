@@ -3,19 +3,21 @@ module powerbi.extensibility.visual {
 	import ClassAndSelector = powerbi.extensibility.utils.svg.CssConstants.ClassAndSelector;
 	import CS = powerbi.extensibility.utils.svg.CssConstants.createClassAndSelector;
 		/**
-		 * root(svg)
+		 * 
+		 * root(div)
+		 * 	 wrapper(div)
 		 *
-		 *      top(g)
+		 *      top(div)
 		 *          legend(g)
 		 *          ......
-		 *      bottom(g)
+		 *      bottom(div)
 		 *          xAxis(g)
 		 *          ......
-		 *      content(g)
+		 *      content(div)
 		 *
-		 *             yAxis(g)
+		 *             yAxis(div)
 		 *              ......
-		 *             container(g)
+		 *             container(div)
 		 *
 		 *                     items(g)
 		 *                          item__list(g)
@@ -32,7 +34,18 @@ module powerbi.extensibility.visual {
 		 */
 
 	const Selectors = {
-
+		wrapper: CS("wrapper"),
+		topContent: CS("top_content"),
+		bottomContent: CS("bottom_content"),
+		content: CS("content"),
+		legend: CS('legend'),
+		xAxis: CS("x_axis"),
+		yAxis: CS('y_axis'),
+		container: CS('container'),
+		items: CS('items'),
+		currentDate: CS('current_date'),
+		currentDateLine: CS('line__current_date'),
+		eachItem: CS('item')
 	}
 
 	export class Chart {
@@ -49,6 +62,8 @@ module powerbi.extensibility.visual {
 		private items: d3.Selection<SVGElement>;
 		private currentDate: d3.Selection<SVGElement>;
 		private containerElement;
+		private currentDateLine: d3.Selection<SVGElement>;
+		private eachItem: d3.Selection<SVGGElement>
 
 		private tooltip: TooltipVisual;
 
@@ -64,28 +79,31 @@ module powerbi.extensibility.visual {
 
 			
 
-
 			this.root = d3
 				.select(options.element)
 				.append("svg")
 				.classed("root", true);
 
-			this.topContent = this.root.append("g").classed("topContent", true);
-			this.legend = this.topContent.append("g").classed("legend", true);
+			// this.wrapper = this.root
+			// 	.append("div")
+			// 	.classed(Selectors.wrapper.className, true);
 
-			this.bottomContent = this.root.append("g").classed("bottomContent", true);
-			this.xAxis = this.bottomContent.append("g").classed("xAxis", true);
+			this.topContent = this.root.append("g").classed(Selectors.topContent.className, true);
+			this.legend = this.topContent.append("g").classed(Selectors.legend.className, true);
 
-			this.content = this.root.append("g").classed("content", true);
+			this.bottomContent = this.root.append("g").classed(Selectors.bottomContent.className, true);
+			this.xAxis = this.bottomContent.append("g").classed(Selectors.xAxis.className, true);
 
-			this.yAxis = this.content.append("g").classed("yAxis", true);
+			this.content = this.root.append("g").classed(Selectors.content.className, true);
+
+			this.yAxis = this.content.append("g").classed(Selectors.yAxis.className, true);
 
 			//this.containerElement = this.content.append("div").classed("container", true);
-			
-			this.container = this.content.append("g").classed("container", true);
-			this.items = this.container.append("g").classed("items", true);
 
-		    this.currentDate = this.container.append("g").classed('current_time', true);
+			this.container = this.content.append("g").classed(Selectors.container.className, true);
+			this.items = this.container.append("g").classed(Selectors.items.className, true);
+
+		    this.currentDate = this.container.append("g").classed(Selectors.currentDate.className, true);
 
 			this.tooltip = new TooltipVisual(options);
 		}
@@ -138,14 +156,14 @@ module powerbi.extensibility.visual {
 			let currentDateLinePos: number = xScale(currentDateTime);
 
 			
-			let update$line = this.currentDate.selectAll('.line__current-time').data([currentDateTime]);
+			let update$line = this.currentDate.selectAll(Selectors.currentDateLine.selectorName).data([currentDateTime]);
 
 			
-			let update$data = this.items.selectAll(".item").data(data, d => d.id);
+			let update$data = this.items.selectAll(Selectors.items.selectorName).data(data, d => d.id);
 			let enter$date = update$data.enter();
 			let exit$data = update$data.exit();
 			let exit$line = update$line.exit();
-			let $item = enter$date.append("g").classed("item", true);
+			let $item = enter$date.append("g").classed(Selectors.items.className, true);
 		
 			// Create Children for prediction
 			{
@@ -267,7 +285,7 @@ module powerbi.extensibility.visual {
 			console.log("currentDateline", currentDateTime, currentDateLinePos,"xScale: ", xScale(currentDateTime));
 
 			update$line.enter().append("line")
-				.classed("line__current-time", true);
+				.classed(Selectors.currentDateLine.className, true);
 
 
 			update$line.each(function (this: SVGElement){
@@ -397,7 +415,7 @@ module powerbi.extensibility.visual {
 		}
 
 		public addTooltip(){
-			this.tooltip.addTooltip(this.items.selectAll(`.item`));
+			this.tooltip.addTooltip(this.items.selectAll(Selectors.items.selectorName));
 		}
 	}
 
